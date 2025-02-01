@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')        // Custom table name
 export class User extends BaseEntity{
@@ -8,9 +8,20 @@ export class User extends BaseEntity{
     @Column()
     name!: string
 
-    @Column()
+    @Column({
+        unique: true
+    })
     userName!: string
 
     @Column()
     password!: string
+
+    @Column()
+    @CreateDateColumn()
+    createdAt!: string
+
+    @Column({
+        default: false
+    })
+    deleted!: boolean
 }
